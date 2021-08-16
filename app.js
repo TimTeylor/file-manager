@@ -8,7 +8,7 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.get('/api/manager', function(req, res) {
+app.get('/', function(req, res) {
   res.send(`${__dirname}/assets/melina-kiefer-E983H8H1zuo-unsplash.jpg`)
 })
 
