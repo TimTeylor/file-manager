@@ -9,8 +9,7 @@ app.use(function(req, res, next) {
 })
 
 app.get('/api/manager', function(req, res) {
-  // res.sendFile('./assets/vera-gorbunova-fGQ4l-0fjbE-unsplash.jpg')
-  res.send(`${__dirname}/assets/vera-gorbunova-fGQ4l-0fjbE-unsplash.jpg`)
+  res.send(`${__dirname}/assets/melina-kiefer-E983H8H1zuo-unsplash.jpg`)
 })
 
 app.listen(port, () => {
