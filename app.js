@@ -8,10 +8,6 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.get('/', function(req, res) {
-  res.send('Root')
-})
-
 app.get('/api', function(req, res) {
   res.send('Api')
 })
