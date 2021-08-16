@@ -9,8 +9,11 @@ app.use(function(req, res, next) {
 })
 
 app.get('/', function(req, res) {
-  res.send('Hello')
-  // res.send(`${__dirname}/assets/melina-kiefer-E983H8H1zuo-unsplash.jpg`)
+  res.send('Root')
+})
+
+app.get('/api', function(req, res) {
+  res.send('Api')
 })
 
 app.listen(port, () => {
