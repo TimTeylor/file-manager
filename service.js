@@ -11,10 +11,7 @@ const service = {
   
       files.forEach(function (file, index) {
         arrNamesFiles.push(file)
-
-        
         if(files.length == index + 1) return res.json({files: arrNamesFiles})
-        console.log(files.length, index)
       })
 
     })
