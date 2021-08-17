@@ -1,6 +1,6 @@
 const service = {
   
-  getAllFiles: async function() {
+  getAllFiles: function(req, res) {
     const path = require('path')
     const fs = require('fs')
     const directoryPath = path.join(__dirname, 'assets')
@@ -9,11 +9,14 @@ const service = {
     fs.readdir(directoryPath, function(err, files) {
       if(err) return console.log('Unable to scan directory: ' + err)
   
-      await files.forEach(function (file) {
+      files.forEach(function (file, index) {
         arrNamesFiles.push(file)
+
+        
+        if(files.length == index + 1) return res.json({files: arrNamesFiles})
+        console.log(files.length, index)
       })
 
-      await res.json({files: arrNamesFiles})
     })
   }
 
