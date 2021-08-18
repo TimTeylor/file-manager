@@ -4,7 +4,7 @@ const cors = require('cors')
 const app = express()
 
 const corsOptions = {
-  origin: 'https://randevent.com'
+  origin: 'http://localhost:8080'
 }
 
 const port = 5000
