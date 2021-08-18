@@ -1,4 +1,4 @@
-const service = {
+const view = {
   
   getAllFiles: function(req, res) {
     const path = require('path')
@@ -19,4 +19,4 @@ const service = {
 
 }
 
-module.exports = service
+module.exports = view
