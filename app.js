@@ -11,6 +11,7 @@ app.use(function(req, res, next) {
 })
 
 app.get('/api', view.getAllFiles)
+app.use('/static', express.static('assets'))
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
