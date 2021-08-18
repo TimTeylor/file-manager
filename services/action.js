@@ -1,4 +1,3 @@
-const BusBoy = require('busboy')
 const path = require('path')
 const fs = require('fs')
 
@@ -6,19 +5,15 @@ const action = {
 
   uploadFile: function(req, res) {
 
-    const busboy = new BusBoy({headers: req.headers})
+    let file = req.files.file
 
-    busboy.on('file', function(file, filename) {
-      const saveTo = path.join(__dirname, '../assets/' + filename)
-      file.pipe(fs.createWriteStream(saveTo))
-    })
-
-    busboy.on('finish', function() {
+    file.mv(path.join(__dirname, '../assets/') + req.body.filename, err => {
+      if(err) {
+        return res.status(500).send(err)
+      }
       res.writeHead(200, {'Connection': 'close'})
       res.end("That's all folks!")
     })
-    
-    return req.pipe(busboy)
 
   }
 
