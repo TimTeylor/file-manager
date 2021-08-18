@@ -1,11 +1,15 @@
 const express = require('express')
+const multer = require('multer')
 const cors = require('cors')
 
 const app = express()
 
-app.use(cors())
-
 const port = 5000
+
+app.use(cors())
+app.use(multer({dest:'assets'}).single('filedata'))
+app.use('/api/static', express.static('assets'))
+
 
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "http://localhost:8080");
@@ -30,7 +34,6 @@ const action = require('./services/action')
 app.get('/api', view.getAllFiles)
 app.post('/api/upload', action.uploadFile)
 
-app.use('/api/static', express.static('assets'))
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
