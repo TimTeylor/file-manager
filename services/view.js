@@ -3,7 +3,7 @@ const view = {
   getAllFiles: function(req, res) {
     const path = require('path')
     const fs = require('fs')
-    const directoryPath = path.join(__dirname, 'assets')
+    const directoryPath = path.join(__dirname, '../assets')
     const arrNamesFiles = []
 
     fs.readdir(directoryPath, function(err, files) {

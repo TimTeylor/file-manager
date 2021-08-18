@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const port = 5000
 
-const { getAllFiles } = require('./services/view')
-// const action = require('./services/action')
+const view = require('./services/view')
+const action = require('./services/action')
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
@@ -11,8 +11,8 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.get('/api', getAllFiles)
-// app.post('/api/upload', action.uploadFile)
+app.get('/api', view.getAllFiles)
+app.post('/api/upload', action.uploadFile)
 
 app.use('/api/static', express.static('assets'))
 
