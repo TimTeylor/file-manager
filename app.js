@@ -6,13 +6,12 @@ const app = express()
 const corsOptions = {
   origin: 'http://localhost:8080'
 }
+app.use(cors(corsOptions))
 
 const port = 5000
 
 const view = require('./services/view')
 const action = require('./services/action')
-
-app.use(cors(corsOptions))
 
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
