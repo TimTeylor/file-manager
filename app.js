@@ -8,6 +8,7 @@ const action = require('./services/action')
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*")
   res.header("Content-Type", "application/json")
+  res.header("Content-Type", "form/multipart")
   next()
 })
 
