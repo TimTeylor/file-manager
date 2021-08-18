@@ -7,8 +7,8 @@ const action = {
       res.status(400)
       res.send('Error')
     } else {
-      res.code(200)
-      res.send('Done')
+      res.writeHead(200, {'Connection': 'close'})
+      res.end("That's all folks!")
     }
 
   }
