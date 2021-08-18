@@ -14,7 +14,6 @@ const action = {
     })
 
     busboy.on('finish', function() {
-      console.log('кракракра')
       res.writeHead(200, {
         "Access-Control-Allow-Origin": "*",
         'Connection': 'close'
