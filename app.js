@@ -22,7 +22,7 @@ app.use(function(req, res, next) {
 })
 
 app.get('/api', view.getAllFiles)
-app.post('/api/upload', action.uploadFile)
+app.put('/api/upload', action.uploadFile)
 
 app.use('/api/static', express.static('assets'))
 
