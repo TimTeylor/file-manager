@@ -3,7 +3,10 @@ const view = {
   getAllFiles: function(req, res) {
     const path = require('path')
     const fs = require('fs')
-    const directoryPath = path.join(__dirname, '../assets')
+
+    let basePath = req.query['path'] ? `../assets/${req.query['path']}` : '../assets'
+
+    const directoryPath = path.join(__dirname, basePath)
     const arrNames = {
       folders: [],
       files: []
@@ -13,8 +16,10 @@ const view = {
       if(err) return console.log('Unable to scan directory: ' + err)
 
       if(files.length == 0) {
-        res.writeHead(200, {'Connection': 'close'})
-        return res.end("Directory is empty")
+        return res.json({
+          path: basePath,
+          files: []
+        })
       }
   
       files.forEach(function (file, index) {
@@ -24,7 +29,12 @@ const view = {
           arrNames.files.push(file)
         }
         
-        if(files.length == index + 1) return res.json({files: arrNames})
+        if(files.length == index + 1) {
+          return res.json({
+            path: basePath,
+            files: arrNames
+          })
+        }
       })
 
     })
