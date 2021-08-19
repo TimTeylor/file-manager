@@ -1,3 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+
 const action = {
 
   uploadFile: function(req, res) {
@@ -9,6 +12,20 @@ const action = {
       res.writeHead(200, {'Connection': 'close'})
       res.end("That's all folks!")
     }
+
+  },
+
+  createFolder: function(req, res) {
+
+    const folderName = req.body.name
+
+    fs.mkdir(path.join(__dirname, '../assets/' + folderName), function(err) {
+      if(err) res.status(500).send(err)
+      else {
+        res.writeHead(202, {'Connection': 'close'})
+        res.end("That's all folks!")
+      }
+    })
 
   }
 
