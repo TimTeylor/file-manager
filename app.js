@@ -18,7 +18,9 @@ app.use(function(req, res, next) {
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'assets/')
+    
+    const basePath = req.query['path'] ? `assets/${req.query['path']}` : 'assets/'
+    cb(null, basePath)
   },
   filename: function (req, file, cb) {
     let ext = ''
@@ -32,7 +34,7 @@ const storage = multer.diskStorage({
 const upload = multer({storage: storage})
 
 app.use(express.json())
-app.use('/api/static', express.static('assets'))
+app.use('/api/assets', express.static('assets'))
 
 const view = require('./services/view')
 const action = require('./services/action')

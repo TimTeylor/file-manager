@@ -18,8 +18,9 @@ const action = {
   createFolder: function(req, res) {
 
     const folderName = req.body.name
+    let basePath = req.query['path'] ? `${req.query['path']}` : '/'
 
-    fs.mkdir(path.join(__dirname, '../assets/' + folderName), function(err) {
+    fs.mkdir(path.join(__dirname, '../assets' + basePath + '/' + folderName), function(err) {
       if(err) res.status(500).send(err)
       else {
         res.writeHead(202, {'Connection': 'close'})

@@ -4,9 +4,9 @@ const view = {
     const path = require('path')
     const fs = require('fs')
 
-    let basePath = req.query['path'] ? `../assets/${req.query['path']}` : '../assets'
+    let basePath = req.query['path'] ? `${req.query['path']}` : '/'
 
-    const directoryPath = path.join(__dirname, basePath)
+    const directoryPath = path.join(__dirname, '../assets' + basePath)
     const arrNames = {
       folders: [],
       files: []
