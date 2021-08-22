@@ -26,7 +26,11 @@ const view = {
         if(file.split('.').length == 1) {
           arrNames.folders.push(file)
         } else {
-          arrNames.files.push(file)
+          const coverPath = basePath == '/' ? basePath : basePath + '/'
+          arrNames.files.push({
+            name: file,
+            src: coverPath + file
+          })
         }
         
         if(files.length == index + 1) {
