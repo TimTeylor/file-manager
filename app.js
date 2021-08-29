@@ -40,6 +40,7 @@ const view = require('./services/view')
 const action = require('./services/action')
 
 app.get('/api', view.getAllFiles)
+app.get('/api/search', view.search)
 app.post('/api/upload', upload.single('filedata'), action.uploadFile)
 app.post('/api/folder/create', action.createFolder)
 
