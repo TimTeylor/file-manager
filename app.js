@@ -43,6 +43,7 @@ app.get('/api', view.getAllFiles)
 app.get('/api/search', view.search)
 app.post('/api/upload', upload.single('filedata'), action.uploadFile)
 app.post('/api/folder/create', action.createFolder)
+app.delete('/api/delete', action.delete)
 
 
 app.listen(port, () => {

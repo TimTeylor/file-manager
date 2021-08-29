@@ -1,4 +1,4 @@
-const fs = require('fs')
+const { mkdir, unlink, rm } = require('fs')
 const path = require('path')
 
 const action = {
@@ -20,7 +20,7 @@ const action = {
     const folderName = req.body.name
     let basePath = req.query['path'] ? `${req.query['path']}` : '/'
 
-    fs.mkdir(path.join(__dirname, '../assets' + basePath + '/' + folderName), function(err) {
+    mkdir(path.join(__dirname, '../assets' + basePath + '/' + folderName), function(err) {
       if(err) res.status(500).send(err)
       else {
         res.writeHead(202, {'Connection': 'close'})
@@ -28,6 +28,27 @@ const action = {
       }
     })
 
+  },
+
+  delete: function(req, res) {
+    const name = req.body.fullPath
+    const pathJoin = path.join(__dirname, '../assets' + name)
+
+    if(name.split('.').length > 1) {
+      unlink(pathJoin, err => {
+        if(err) return res.status(500).send(err)
+
+        res.writeHead(200, {'Connection': 'close'})
+        res.end("File delete")
+      })
+    } else {
+      rm(pathJoin, { recursive: true }, err => {
+        if(err) return res.status(500).send(err)
+
+        res.writeHead(200, {'Connection': 'close'})
+        res.end("Folder delete")
+      })
+    }
   }
 
 }
