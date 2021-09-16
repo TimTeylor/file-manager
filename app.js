@@ -46,6 +46,7 @@ app.get('/api/folder/all', view.getAllFolders)
 app.post('/api/folder/create', action.createFolder)
 app.delete('/api/delete', action.delete)
 app.post('/api/move', action.moveTo)
+app.post('/api/rename', action.renameFile)
 
 
 app.listen(port, () => {

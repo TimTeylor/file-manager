@@ -14,6 +14,21 @@ const action = {
     })
   },
 
+  renameFile: function (req, res) {
+    const type = req.body.oldPath.split('.')[1]
+    const oldName = req.body.oldPath
+    const newName = req.body.newPath
+
+    const oldPath = path.join(__dirname, '../assets/', oldName)
+    const newPath = path.join(__dirname, '../assets/', newName + '.' + type)
+
+    rename(oldPath, newPath, err => {
+      if (err) res.status(500).send('Error')
+      res.writeHead(200, {'Connection': 'close'})
+      res.end("Done!")
+    })
+  },
+
   uploadFile: function(req, res) {
 
     const filedata = req.file
