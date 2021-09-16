@@ -1,8 +1,31 @@
+const { readdir, readdirSync, stat, statSync } = require('fs')
+const path = require('path')
+
 const view = {
+
+  getAllFolders: function(req, res) {
+    const directoryPath = path.join(__dirname, '../assets/')
+    let folders = []
+
+    function ThroughDirectory(Directory) {
+      readdirSync(Directory).forEach(File => {
+
+        const Absolute = path.join(Directory, File)
+        if (statSync(Absolute).isDirectory()) {
+          let normalyPath = Absolute.split('assets')
+          normalyPath = normalyPath[1].replace(/\\/g, '/')
+          folders.push(normalyPath)
+          return ThroughDirectory(Absolute)
+        }
+
+      });
+    }
+  
+    ThroughDirectory(directoryPath)
+    return res.json({folders})
+  },
   
   getAllFiles: function(req, res) {
-    const path = require('path')
-    const fs = require('fs')
 
     let basePath = req.query['path'] ? `${req.query['path']}` : '/'
 
@@ -12,7 +35,7 @@ const view = {
       files: []
     }
 
-    fs.readdir(directoryPath, function(err, files) {
+    readdir(directoryPath, function(err, files) {
       if(err) return console.log('Unable to scan directory: ' + err)
 
       if(files.length == 0) {
@@ -45,8 +68,6 @@ const view = {
   },
 
   search: function(req, res) {
-    const fs = require('fs')
-    const path = require('path')
 
     const searchStr = req.query['search']
 
@@ -54,14 +75,14 @@ const view = {
 
     const walk = function(dir, done) {
       let results = []
-      fs.readdir(dir, function(err, list) {
+      readdir(dir, function(err, list) {
         if(err) return done(err)
         let i = 0;
         (function next() {
           let file = list[i++]
           if(!file) return done(null, results)
           file = path.resolve(dir, file)
-          fs.stat(file, function(err, stat) {
+          stat(file, function(err, stat) {
             if(stat && stat.isDirectory()) {
               walk(file, function(err, res) {
                 results = results.concat(res)

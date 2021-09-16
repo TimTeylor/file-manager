@@ -42,8 +42,10 @@ const action = require('./services/action')
 app.get('/api', view.getAllFiles)
 app.get('/api/search', view.search)
 app.post('/api/upload', upload.single('filedata'), action.uploadFile)
+app.get('/api/folder/all', view.getAllFolders)
 app.post('/api/folder/create', action.createFolder)
 app.delete('/api/delete', action.delete)
+app.post('/api/move', action.moveTo)
 
 
 app.listen(port, () => {

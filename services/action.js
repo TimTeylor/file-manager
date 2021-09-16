@@ -1,7 +1,18 @@
-const { mkdir, unlink, rm } = require('fs')
+const { mkdir, unlink, rm, rename } = require('fs')
 const path = require('path')
 
 const action = {
+  moveTo: function (req, res) {
+    const fileName = req.body.name
+    const currentPath = path.join(__dirname, '../assets/', req.body.oldPath)
+    const newPath = path.join(__dirname, '../assets/', req.body.newPath, fileName)
+
+    rename(currentPath, newPath, err => {
+      if (err) res.status(500).send('Error')
+      res.writeHead(200, {'Connection': 'close'})
+      res.end("Done!")
+    })
+  },
 
   uploadFile: function(req, res) {
 
