@@ -13,7 +13,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "*")
   res.header("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-  next();
+  next()
 })
 
 const storage = multer.diskStorage({
